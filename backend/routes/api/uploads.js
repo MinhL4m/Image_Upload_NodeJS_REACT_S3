@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const model = require("../../models");
+const models = require("../../models");
 const sharp = require("sharp");
 const multer = require("multer");
 const storage = multer.memoryStorage();

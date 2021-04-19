@@ -2,7 +2,7 @@
 
 ## Dependencies
 
-- Multer: used for accepting a file through form data from the UI
+- Multer: used for accepting a file through form data from the UI. middleware for handling multipart/form-data, which is primarily used for uploading files.
 
   - This can be used to set up to use disk or in-memory storage.
   - Since we are using S3 for file storage we will set up as in memory which means we’ll receive the file as a buffer and can transfer straight to S3
@@ -64,6 +64,26 @@ region = YOUR_S3_BUCKET_REGION (i.e. us-east-2)
     - Sample: `npx sequelize-cli model:generate --name images --attributes id:uuid,bucket:string,key:string`
 
 `npx sequelize-cli db:migrate`: migarate create new table in the db.
+
+## Multer
+
+- [Doc](https://www.npmjs.com/package/multer)
+
+```js
+app.post("/profile", upload.single("avatar"), function (req, res, next) {
+  // req.file is the `avatar` file
+  // req.body will hold the text fields, if there were any
+});
+
+app.post(
+  "/photos/upload",
+  upload.array("photos", 12),
+  function (req, res, next) {
+    // req.files is array of `photos` files
+    // req.body will contain the text fields, if there were any
+  }
+);
+```
 
 ## Read more:
 
